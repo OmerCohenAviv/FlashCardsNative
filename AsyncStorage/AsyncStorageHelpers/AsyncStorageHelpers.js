@@ -22,19 +22,36 @@ const allDecksObject = {
                 answer: 'Israel'
             }
         ]
+    },
+    Math: {
+        title: 'Math',
+        questions: [
+            {
+                question: 'how much is 2x2',
+                answer: '4?'
+            },
+            {
+                question: 'is root of 2 Real number?',
+                answer: 'yes.'
+            },
+            {
+            question: 'are you sick?',
+            answer: 'no?'
+            }
+        ]
     }
 }
 
-
-export async function initDecks() {  
+//Setting allDecks (demo object is given)
+export async function initDecks() {
     console.log('init')
-   return await AsyncStorage.mergeItem( 'ALL_DECKS', JSON.stringify(allDecksObject) )
+    return await AsyncStorage.setItem('ALL_DECKS', JSON.stringify(allDecksObject))
 };
-
+//fetching allDecks 
 export async function getDecks() {
-   return await AsyncStorage.getItem('ALL_DECKS')
+    return await AsyncStorage.getItem('ALL_DECKS')
 };
-
+//Fetching specific Deck
 export const getDeck = (deckID) => {
     let deck = ''
     AsyncStorage.getItem('ALL_DECKS')
@@ -44,12 +61,11 @@ export const getDeck = (deckID) => {
         .catch((error) => console.log('error'))
     return deck;
 };
-
-
+//Creating a new Deck by title.
 export const saveDeckTitle = (title) => {
     AsyncStorage.mergeItem(allDecksJSON, title)
 };
-
+//Adding a question to a given deck (title)
 export const addCardToDeck = (title, card) => {
     const deck = JSON.parse(getDeck(title));
     const copyedCard = card;

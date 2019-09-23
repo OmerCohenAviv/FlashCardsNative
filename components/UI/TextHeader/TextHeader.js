@@ -14,9 +14,10 @@ const textHeader =  ( props ) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 0.2,
         justifyContent: 'flex-start',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginTop: 25
     },
     titleText: {
         color: 'black',

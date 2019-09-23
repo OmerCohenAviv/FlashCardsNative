@@ -10,8 +10,9 @@ export const Tabs = createMaterialTopTabNavigator({
         navigationOptions: {
             tabBarLabel: 'All Decks',
             tabBarIcon: ({ tintColor }) => <FontAwesome name='credit-card' size={25} color={tintColor} />
-        }
+        },
     },
+    
 }, {
     tabBarOptions: {
         activeTintColor: Platform.OS === 'ios' ? 'yellow' : 'yellow',

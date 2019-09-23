@@ -1,19 +1,49 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, StatusBar, Platform, AsyncStorage,  } from 'react-native';
 
-export default function App() {
+import Constants from 'expo-constants';
+import { getDecks, saveDeckTitle, initDecks } from './AsyncStorage/AsyncStorageHelpers/AsyncStorageHelpers';
+import { Tabs, } from './Navigation/Tabs';
+import { createAppContainer } from 'react-navigation';
+import { getProvidesAudioData } from 'expo/build/AR';
+
+
+const StatusBarFlashCards = (...props) => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <View style={{ height: Constants.statusBarHeight }}>
+      <StatusBar translucent   {...props} />
     </View>
   );
+};
+const AppContainer = createAppContainer(Tabs)
+
+class App extends Component {
+  state = {
+    allDecks: {},
+    initDeck: false
+  };
+  componentDidMount() {
+  getDecks().then( (allDecksFetched) => {
+    if (allDecksFetched === null ) {
+      initDecks().then( () => {
+        this.setState({initDeck: true})
+      })
+    }
+    this.setState({allDecks: allDecksFetched})
+  })
+
+  }
+  render() {
+    console.log(this.state.allDecks)
+    return (
+      <View style={{ flex: 1 }}>
+        <StatusBarFlashCards barStyle='light-content' backgroundColor='black' />
+        <AppContainer />
+      </View>
+    );
+  };
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+
+export default App;

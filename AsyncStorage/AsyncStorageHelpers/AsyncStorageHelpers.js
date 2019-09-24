@@ -52,14 +52,12 @@ export async function getDecks() {
     return await AsyncStorage.getItem('ALL_DECKS')
 };
 //Fetching specific Deck
-export const getDeck = (deckID) => {
-    let deck = ''
-    AsyncStorage.getItem('ALL_DECKS')
+export async function getDeck(deckID) {
+    return await AsyncStorage.getItem('ALL_DECKS')
         .then((allDecks) => {
-            deck = allDecks.filter((deck) => deck === deckID)
+            return deck = allDecks.filter((deck) => deck === deckID)
         })
         .catch((error) => console.log('error'))
-    return deck;
 };
 //Creating a new Deck by title.
 export const saveDeckTitle = (deckTitle) => {
@@ -72,10 +70,16 @@ export const saveDeckTitle = (deckTitle) => {
     AsyncStorage.mergeItem('ALL_DECKS', JSON.stringify(deck))
 };
 //Adding a question to a given deck (title)
-export const addCardToDeck = (title, card) => {
-    const deck = JSON.parse(getDeck(title));
-    const copyedCard = card;
-    const updatedDeck = JSON.stringify({ ...copyedCard, ...deck });
-    AsyncStorage.mergeItem(allDecksJSON, updatedDeck);
+export async function addCardToDeck(title, question, deckData) {
+    let updatedDeck = {
+        [title]: {
+            questions: [
+                ...deckData.questions,
+               question
+            ]
+        }
+    }
+    updatedDeck = JSON.stringify(updatedDeck)
+    return await AsyncStorage.mergeItem('ALL_DECKS', updatedDeck);
 };
 

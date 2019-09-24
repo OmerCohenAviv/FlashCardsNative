@@ -28,7 +28,7 @@ class CreateDeck extends Component {
                 <View>
                     <TextInput
                             accessibilityLabel='hey'
-                        placeHolder='Deck Name Goes here!'
+                        placeholder='Deck Name Goes here!'
                         style={{ justifyContent: 'center', borderColor: 'gray', borderWidth: 1 }}
                         onChangeText={this.changeTextHandler}
                         value={this.state.DeckTextValue} />

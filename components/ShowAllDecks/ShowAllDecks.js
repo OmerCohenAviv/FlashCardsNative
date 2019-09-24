@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import DeckTitleBtn from './DeckTitleBtn/DeckTitleBtn';
-import Deck from '../Deck/Deck';
+import Deck from '../../containers/Deck/Deck';
 
 
 const showAllDecks = (props) => {

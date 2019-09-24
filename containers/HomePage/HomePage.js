@@ -8,9 +8,15 @@ class HomePage extends Component {
     state = {
         allDecks: null,
         showDeck: false,
-        
+
     };
     componentDidMount() {
+        this.props.navigation.addListener(
+            'didFocus',
+            payload => {
+                this.forceUpdate();
+            }
+        );
         getDecks().then((allDecks) => {
             const fetchedDecks = JSON.parse(allDecks)
             this.setState({ allDecks: fetchedDecks })
@@ -19,15 +25,15 @@ class HomePage extends Component {
     componentDidUpdate() {
         getDecks().then((allDecksFetched) => {
             if (allDecksFetched !== JSON.stringify(this.state.allDecks)) {
-
                 return this.setState({ allDecks: JSON.parse(allDecksFetched) })
             }
             else return;
         })
     };
+
     clickDeckHandler = (card) => {
         const { navigation } = this.props
-       return navigation.navigate('Deck', {
+        return navigation.navigate('Deck', {
             deckData: card
         })
     };

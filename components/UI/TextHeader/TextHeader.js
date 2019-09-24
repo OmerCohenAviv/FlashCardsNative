@@ -14,7 +14,6 @@ const textHeader =  ( props ) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.2,
         justifyContent: 'flex-start',
         alignSelf: 'center',
         marginTop: 25

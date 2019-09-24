@@ -7,7 +7,7 @@ import { AsyncStorage } from 'react-native';
 // saveDeckTitle() //Creating a deck
 // addCardToDeck() //Creating a new Card to a spec Deck.
 
-const allDecksJSON = JSON.stringify('ALL_DECKS');
+
 
 const allDecksObject = {
     React: {
@@ -35,8 +35,8 @@ const allDecksObject = {
                 answer: 'yes.'
             },
             {
-            question: 'are you sick?',
-            answer: 'no?'
+                question: 'are you sick?',
+                answer: 'yes'
             }
         ]
     }
@@ -62,8 +62,14 @@ export const getDeck = (deckID) => {
     return deck;
 };
 //Creating a new Deck by title.
-export const saveDeckTitle = (title) => {
-    AsyncStorage.mergeItem(allDecksJSON, title)
+export const saveDeckTitle = (deckTitle) => {
+    let deck = {
+        [deckTitle]: {
+            title: `${deckTitle}`,
+            questions: [],
+        }
+    }
+    AsyncStorage.mergeItem('ALL_DECKS', JSON.stringify(deck))
 };
 //Adding a question to a given deck (title)
 export const addCardToDeck = (title, card) => {

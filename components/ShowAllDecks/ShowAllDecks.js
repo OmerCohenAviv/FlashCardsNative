@@ -1,13 +1,18 @@
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
-import { getDecks } from '../../AsyncStorage/AsyncStorageHelpers/AsyncStorageHelpers';
+import { FlatList } from 'react-native';
 import DeckTitleBtn from './DeckTitleBtn/DeckTitleBtn';
+import Deck from '../Deck/Deck';
 
 
 const showAllDecks = (props) => {
-    let { allDecks, showDeck } = props
+    let { allDecks, showDeck, clickDeck } = props
     const _renderItem = ({ item }) => {
-        return < DeckTitleBtn title={item.title} key={item.title} questionsLength={item.questions.length} />
+        return < DeckTitleBtn
+            card={item}
+            title={item.title}
+            key={item.title}
+            questionsLength={item.questions.length}
+            clickDeck={ clickDeck } />
     };
     if (showDeck === false) {
         return (
@@ -19,6 +24,9 @@ const showAllDecks = (props) => {
             />
         );
     }
+    else return (
+        <Deck  title='check' />
+    )
 };
 
 export default showAllDecks;

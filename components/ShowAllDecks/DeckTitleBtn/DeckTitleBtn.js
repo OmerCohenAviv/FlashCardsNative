@@ -2,11 +2,10 @@ import React from 'react';
 import { View, Text, StyleSheet} from 'react-native';
 import { TouchableOpacity} from 'react-native-gesture-handler';
 
-const deckTitleBtn = ({ title, questionsLength }) => {
-    console.log(questionsLength)
+const deckTitleBtn = ({ title, questionsLength, card, clickDeck }) => {
     return (
         <View key={title} style={styles.container}>
-            <TouchableOpacity style={styles.button} >
+            <TouchableOpacity style={styles.button} onPress={() => clickDeck(card)}>
                 <Text style={styles.text}>
                     {title}
                 </Text>
@@ -24,13 +23,12 @@ const deckTitleBtn = ({ title, questionsLength }) => {
 };
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 15
     },
     text: {
-        fontSize: 35,
+        fontSize: 15,
         fontWeight: 'bold'
     },
     button: {

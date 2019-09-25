@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 const startQuizBtn = ( props ) => {
     return (
         <View style={{marginTop: 10}}>
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity style={styles.btn} onPress={props.startQuiz}>
                 <Text>
                     Start Quiz!
                 </Text>

@@ -15,8 +15,8 @@ const deckUI = (props) => {
                     questionsInside={props.questionsInside} />
             </View>
             <View style={styles.buttons}>
-                    <AddQuestionBtn />
-                    <StartQuestionBtn />
+                    <AddQuestionBtn addQuestion={props.addQuestion}/>
+                    <StartQuestionBtn startQuiz={props.startQuiz}/>
             </View>
         </View>
     );

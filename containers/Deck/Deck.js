@@ -50,7 +50,9 @@ class Deck extends Component {
         if (this.state.deckData) {
             return (
                 <View style={{ flex: 1 }} >
-                    <DeckUI 
+                    <DeckUI
+                    startQuiz={this.startQuizHandler}
+                    addQuestion={this.addQuestionHandler}
                     questionsInside={this.state.deckData.questions.length}
                     deckName={this.state.deckData.title}  />
                 </View>

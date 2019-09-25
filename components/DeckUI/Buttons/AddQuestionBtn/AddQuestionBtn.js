@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 const addQuestionBtn = ( props ) => {
     return (
         <View>
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity style={styles.btn} onPress={props.addQuestion}>
                 <Text>
                     Add Card!
                 </Text>

@@ -19,9 +19,6 @@ const quizTitle = (props) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
     titleContainer: {
         marginTop: 15,
         alignItems: 'center',

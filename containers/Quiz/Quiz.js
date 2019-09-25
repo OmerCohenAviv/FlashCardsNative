@@ -51,6 +51,7 @@ class Quiz extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <QuizUI
+                    showAnswer={this.showAnswerHandler}
                     toDisplayQuestion={this.state.displayAnswer}
                     currentQuestion={this.state.displayedQuestion}
                     currentCardPosition={this.state.questions.indexOf(this.state.displayedQuestion) + 1}

@@ -1,23 +1,36 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import QuizTitle from './QuizTitle/QuizTitle';
-import Di
+import DisplayQuestion from './DisplayQA/Question/Question';
+import DisplayAnswer from './DisplayQA/Answer/Answer';
+import ShowAnswerBtn from './Buttons/ShowAnswerBtn/ShowAnswerBtn';
 
 
 const Quiz = (props) => {
-    const { deckName, totalCards, currentCardPosition, toDisplayQuestion} = props
+    const { deckName,
+        totalCards,
+        currentCardPosition,
+        toDisplayQuestion,
+        showAnswer,
+        currentQuestion } = props
     return (
         <View style={styles.container}>
             <View>
-                <QuizTitle 
-                currentCardPosition={currentCardPosition}
-                totalCards={totalCards}
-                deckName={deckName}  />
+                <QuizTitle
+                    currentCardPosition={currentCardPosition}
+                    totalCards={totalCards}
+                    deckName={deckName} />
+            </View>
+            <View style={styles.display}>
+                {
+                    toDisplayQuestion
+                        ? <DisplayAnswer answer={currentQuestion.answer} />
+                        : <DisplayQuestion question={currentQuestion.question} />
+                }
+
             </View>
             <View>
-                {
-                    toDisplayQuestion ? <DisplayQuestion /> : <DisplayAnswer />
-                }
+                <ShowAnswerBtn showAnswer={showAnswer}/>
             </View>
         </View>
     );
@@ -27,6 +40,11 @@ const Quiz = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1
+    },
+    display: {
+        justifyContent: 'center',
+        marginTop: 45,
+        alignItems: 'center'
     }
 })
 

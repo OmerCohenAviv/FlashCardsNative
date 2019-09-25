@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
+import { createMaterialTopTabNavigator, createBottomTabNavigator } from 'react-navigation-tabs';
 import { FontAwesome } from '@expo/vector-icons';
 import HomePage from '../containers/HomePage/HomePage';
 import CreateDeck from '../containers/CreateDeck/CreateDeck';
@@ -24,6 +24,7 @@ export const Tabs = createMaterialTopTabNavigator({
     tabBarOptions: {
         activeTintColor: Platform.OS === 'ios' ? 'yellow' : 'yellow',
         style: {
+            height: 56,
             color:'black',
             fontSize: 25,
             fontWeight: 'bold',

@@ -85,6 +85,4 @@ const styles = StyleSheet.create({
     }
 })
 
-
-
-export default AddQuestion
+export default AddQuestion;

@@ -37,16 +37,15 @@ class Quiz extends Component {
                     displayAnswer: false,
                 }))
             )
-        }
-        console.log(nextQuestion)
-        console.log(this.state.correctAnswers)
+        };
         this.setState((prevState) => ({
             correctAnswers: prevState.correctAnswers + score,
             displayedQuestion: nextQuestion,
             displayAnswer: false,
         }))
 
-    }
+    };
+    
     render() {
         let showCorrectType = ''
         if (this.state.displayedQuestion !== '' && this.state.displayedQuestion !== undefined) {

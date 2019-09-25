@@ -3,6 +3,7 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import TextHeader from '../../components/UI/TextHeader/TextHeader'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { getDeck } from '../../AsyncStorage/AsyncStorageHelpers/AsyncStorageHelpers';
+import DeckUI from '../../components/DeckUI/DeckUI'
 
 class Deck extends Component {
     state = {
@@ -46,11 +47,20 @@ class Deck extends Component {
                 </View>
             )
         }
-        return (
-            <View style={{ flex: 1 }} >
-                {deckUI}
+        if (this.state.deckData) {
+            return (
+                <View style={{ flex: 1 }} >
+                    <DeckUI 
+                    questionsInside={this.state.deckData.questions.length}
+                    deckName={this.state.deckData.title}  />
+                </View>
+            );
+        }
+        else return (
+            <View>
+                <Text>Loading</Text>
             </View>
-        );
+        )
     };
 };
 

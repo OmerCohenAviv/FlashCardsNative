@@ -6,7 +6,6 @@ import { getDecks, initDecks } from './AsyncStorage/AsyncStorageHelpers/AsyncSto
 import { mainStackNavigator } from './Navigation/Stack';
 import { createAppContainer } from 'react-navigation';
 
-
 const StatusBarFlashCards = (...props) => {
   return (
     <View style={{ height: Constants.statusBarHeight }}>

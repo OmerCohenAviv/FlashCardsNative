@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Keyboard } from 'react-native';
+import { View, Keyboard } from 'react-native';
 import { saveDeckTitle } from '../../AsyncStorage/AsyncStorageHelpers/AsyncStorageHelpers';
-import TextHeader from '../../components/UI/TextHeader/TextHeader';
+import CreateDeckUI from '../../components/CreateDeckUI/CreateDeckUI';
 
 class CreateDeck extends Component {
     state = {
         DeckTextValue: null
     };
-
+    componentDidMount() {
+        console.log('mounted')
+    }
     changeTextHandler = (text) => {
         this.setState({ DeckTextValue: text })
     };
@@ -18,47 +20,20 @@ class CreateDeck extends Component {
         navigation.navigate('Home', {
             allDecks: null
         })
-
+        this.setState({DeckTextValue: null})
     }
-
     render() {
         return (
-            <View style={{ flex: 1 }}>
-                <TextHeader title='Create Deck!' />
-                <View>
-                    <TextInput
-                            accessibilityLabel='hey'
-                        placeholder='Deck Name Goes here!'
-                        style={{ justifyContent: 'center', borderColor: 'gray', borderWidth: 1 }}
-                        onChangeText={this.changeTextHandler}
-                        value={this.state.DeckTextValue} />
-                    <TouchableOpacity
-
-                        onPress={this.submitNewDeck}
-                        disabled={this.state.DeckTextValue === null || this.state.DeckTextValue.trim() === ''}
-                        style={this.state.DeckTextValue === null || this.state.DeckTextValue.trim() === '' ? styles.SubmitDisabledBtn : styles.SubmitBtn}
-                    >
-                        <Text>Submit</Text>
-                    </TouchableOpacity>
-                </View>
+            <View style={{flex:1}}>
+                <CreateDeckUI
+                    submit={this.submitNewDeck}
+                    value={this.state.DeckTextValue}
+                    valid={this.state.DeckTextValue === null || this.state.DeckTextValue.trim() === ''}
+                    change={this.changeTextHandler} />
             </View>
         );
     };
 };
 
-const styles = StyleSheet.create({
-    SubmitBtn: {
-        alignItems: 'center',
-        marginTop: 15,
-        padding: 7,
-        backgroundColor: 'lightgreen'
-    },
-    SubmitDisabledBtn: {
-        alignItems: 'center',
-        marginTop: 15,
-        padding: 7,
-        backgroundColor: 'red'
-    }
-})
 
 export default CreateDeck;

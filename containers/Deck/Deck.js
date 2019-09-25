@@ -15,7 +15,8 @@ class Deck extends Component {
     }
     startQuizHandler = () => {
         this.props.navigation.navigate('Quiz', {
-            questions: this.state.deckData.questions
+            questions: this.state.deckData.questions,
+            deckName: this.state.deckData.title
         })
     };
     addQuestionHandler = () => {
@@ -24,29 +25,6 @@ class Deck extends Component {
         })
     }
     render() {
-        let deckUI = <ActivityIndicator size="large" color="#0000ff" />
-        if (this.state.deckData !== '' && this.state.deckData) {
-            deckUI = (
-                <View >
-                    <View>
-                        <TextHeader title={this.state.deckData.title} />
-                    </View>
-                    <View>
-                        <Text style={styles.cardsCount}>
-                            {`There are ${this.state.deckData.questions.length} Questions Inside!`}
-                        </Text>
-                    </View>
-                    <View style={styles.buttons}>
-                        <TouchableOpacity style={[styles.button, { backgroundColor: 'yellow' }]} onPress={() => this.addQuestionHandler()}>
-                            <Text>Add Question</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={[styles.button, { backgroundColor: 'lightgreen' }]} onPress={() => this.startQuizHandler()}>
-                            <Text>Start Quiz</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            )
-        }
         if (this.state.deckData) {
             return (
                 <View style={{ flex: 1 }} >
@@ -60,7 +38,7 @@ class Deck extends Component {
         }
         else return (
             <View>
-                <Text>Loading</Text>
+                <ActivityIndicator size="large" color="#0000ff" />
             </View>
         )
     };

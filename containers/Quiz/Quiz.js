@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native'
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { View } from 'react-native'
+import QuizUI from '../../components/QuizUI/QuizUI';
 
 
 
@@ -45,60 +45,21 @@ class Quiz extends Component {
         }))
 
     };
-    
-    render() {
-        let showCorrectType = ''
-        if (this.state.displayedQuestion !== '' && this.state.displayedQuestion !== undefined) {
-            showCorrectType = (
-                <Text>
-                    {this.state.displayedQuestion.question}
-                </Text>
-            )
-            if (this.state.displayAnswer) {
-                showCorrectType = (
-                    <Text>
-                        {this.state.displayedQuestion.answer}
-                    </Text>
 
-                )
-            }
-            if (this.state.finished) {
-                showCorrectType = (
-                    <Text>You Finished the Deck, You had {this.state.correctAnswers} Goodjob</Text>
-                )
-            }
-        }
+    render() {
+        console.log(this.state.displayedQuestion)
         return (
             <View style={{ flex: 1 }}>
-                <Text>
-                    {showCorrectType}
-                </Text>
-                <TouchableOpacity onPress={!this.state.finished ? this.showAnswerHandler : this.showAnswerHandler }>
-                    {
-                        this.state.displayAnswer ? <Text>Please ANSWER FIRST</Text>
-                            : this.state.finished ? <Text>Reset</Text> : <Text>SHOW ANSWER</Text>
-                    }
-                </TouchableOpacity>
-                {
-                    this.state.displayAnswer && !this.state.finished ?
-                        <View style={{ justifyContent: 'center', alignItems: 'center', }}>
-                            <TouchableOpacity onPress={() => this.scoreNextQuestion('right')} style={{ color: 'green' }}>
-                                <Text>
-                                    Correct
-                            </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.scoreNextQuestion('wrong')} style={{ color: 'red' }}>
-                                <Text>
-                                    Incorrect
-                            </Text>
-                            </TouchableOpacity>
-                        </View>
-                        : this.state.finished ? <Text>AWESOME JOB</Text> : <Text>Please Answer First before choosing If u were right</Text>
-                }
-
+                <QuizUI
+                    toDisplayQuestion={this.state.displayAnswer}
+                    currentQuestion={this.state.displayedQuestion}
+                    currentCardPosition={this.state.questions.indexOf(this.state.displayedQuestion) + 1}
+                    deckName={this.props.navigation.state.params.deckName}
+                    totalCards={this.state.questions.length}
+                />
             </View>
-        );
-    };
+        )
+    }
 }
 
 

@@ -1,12 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const titleDeck = (props) => {
-    const { title } = props
+const createTitle = (props) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>
-                {`${title}`}
+                Create A Card
             </Text>
         </View>
     );
@@ -14,8 +13,8 @@ const titleDeck = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-       marginBottom: 10,
-       alignItems: 'center'
+        marginBottom: 10,
+        alignItems: 'center'
     },
     text: {
         fontSize: 35,
@@ -25,4 +24,5 @@ const styles = StyleSheet.create({
     }
 })
 
-export default titleDeck;
+
+export default createTitle;

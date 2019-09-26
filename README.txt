@@ -1,5 +1,4 @@
-Welcome To FlashCards!
-
+Welcome To FlashCards - ANDROID Application
 About ------------------------
 In this Application you can create Decks of FlashCards
 once the deck u created you can create Cards that belong to that 

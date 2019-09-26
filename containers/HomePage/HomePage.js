@@ -31,10 +31,10 @@ class HomePage extends Component {
         })
     };
 
-    clickDeckHandler = (card) => {
+    clickDeckHandler = (deck) => {
         const { navigation } = this.props
         return navigation.navigate('Deck', {
-            deckData: card
+            deckData: deck
         })
     };
 

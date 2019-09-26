@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View } from 'react-native'
+import { View,Text} from 'react-native'
 import QuizUI from '../../components/QuizUI/QuizUI';
-
+import {setLocalNotifications, clearLocalNotifications} from '../../AsyncStorage/Notifications/Notifications';
 
 
 class Quiz extends Component {
@@ -13,15 +13,16 @@ class Quiz extends Component {
         finished: false
     };
     componentDidMount() {
-        let { questions } = this.props.navigation.state.params
-        this.setState({ questions: questions, displayedQuestion: questions[0] })
+        const { questions, deckData } = this.props.navigation.state.params
+        this.setState({ questions: questions, displayedQuestion: questions[0], deckData: deckData })
     }
     showAnswerHandler = () => {
         this.setState((prevState) => ({
             displayAnswer: !prevState.displayAnswer
         }))
     }
-    scoreNextQuestion = (answer) => {
+    scoreNextQuestionHandler = (answer) => {
+        console.log('next')
         let score = 0;
         if (answer === 'right') {
             score = 1;
@@ -45,12 +46,38 @@ class Quiz extends Component {
         }))
 
     };
+    backToDeckHandler = () => {
+        const { navigation } = this.props
+        const { deckData } = this.state.deckData
+        navigation.navigate('Deck',{
+        deckData: deckData
+        })
+        clearLocalNotifications()
+        .then(setLocalNotifications)
+    }
+    resetQuizHandler = () => {
+        let { questions } = this.props.navigation.state.params
+        this.setState({
+            correctAnswers: 0,
+            finished: false,
+            displayAnswer: false,
+            displayedQuestion:  questions[0]
+        }, () => {
+        })
+        clearLocalNotifications()
+        .then(setLocalNotifications)
+    }
 
     render() {
-        console.log(this.state.displayedQuestion)
+        if(!(this.state.questions === undefined || this.state.questions.length == 0)) {
         return (
             <View style={{ flex: 1 }}>
                 <QuizUI
+                    backToDeck={this.backToDeckHandler}
+                    resetQuiz={this.resetQuizHandler}
+                    correctAnswers={this.state.correctAnswers}
+                    finished={this.state.finished}
+                    scoreNextQuestion={this.scoreNextQuestionHandler}
                     showAnswer={this.showAnswerHandler}
                     toDisplayQuestion={this.state.displayAnswer}
                     currentQuestion={this.state.displayedQuestion}
@@ -60,6 +87,14 @@ class Quiz extends Component {
                 />
             </View>
         )
+        }
+        else {
+            return (
+                <View style={{justifyContent:'center',flex: 1,alignItems:'center'}}>
+                    <Text style={{fontSize: 29, fontWeight:'bold',fontStyle:'italic'}}>There is 0 Cards Inside, Please Add Atleast one to start the Quiz.</Text>
+                </View>
+            )
+        }
     }
 }
 

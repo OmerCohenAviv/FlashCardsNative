@@ -10,7 +10,7 @@ const createInput = (props) => {
                 value={value}
                 style={styles.textInput}
                 onChangeText={change}
-                placeholder='Deck Name'
+                placeholder='  Deck Name'
             />
         </View>
     );
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         textAlign: 'justify',
         justifyContent: 'center',
         borderColor: 'gray',
-        borderWidth: 2,
+        borderWidth: 1  ,
         borderRadius: 6
     }
 });

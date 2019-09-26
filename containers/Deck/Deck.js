@@ -16,7 +16,8 @@ class Deck extends Component {
     startQuizHandler = () => {
         this.props.navigation.navigate('Quiz', {
             questions: this.state.deckData.questions,
-            deckName: this.state.deckData.title
+            deckName: this.state.deckData.title,
+            deckData: this.state.deckData
         })
     };
     addQuestionHandler = () => {
@@ -43,22 +44,5 @@ class Deck extends Component {
         )
     };
 };
-
-const styles = StyleSheet.create({
-    cardsCount: {
-        fontWeight: 'bold'
-    },
-    buttons: {
-        marginTop: 30,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    button: {
-        marginTop: 8,
-        padding: 10,
-
-    }
-})
-
 
 export default Deck;

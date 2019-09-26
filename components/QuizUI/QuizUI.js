@@ -4,14 +4,20 @@ import QuizTitle from './QuizTitle/QuizTitle';
 import DisplayQuestion from './DisplayQA/Question/Question';
 import DisplayAnswer from './DisplayQA/Answer/Answer';
 import ShowAnswerBtn from './Buttons/ShowAnswerBtn/ShowAnswerBtn';
-
+import ShowScoreButtons from './Buttons/IsCorrect/IsCorrect';
+import Finished from './Finished/Finished';
 
 const Quiz = (props) => {
     const { deckName,
+        backToDeck,
+        resetQuiz,
+        finished,
+        correctAnswers,
         totalCards,
         currentCardPosition,
         toDisplayQuestion,
         showAnswer,
+        scoreNextQuestion,
         currentQuestion } = props
     return (
         <View style={styles.container}>
@@ -21,17 +27,30 @@ const Quiz = (props) => {
                     totalCards={totalCards}
                     deckName={deckName} />
             </View>
-            <View style={styles.display}>
-                {
-                    toDisplayQuestion
-                        ? <DisplayAnswer answer={currentQuestion.answer} />
-                        : <DisplayQuestion question={currentQuestion.question} />
-                }
+            {
+                !finished
+                    ? <View >
+                        <View style={styles.display}>
+                            {
+                                toDisplayQuestion
+                                    ? <DisplayAnswer answer={currentQuestion.answer} />
+                                    : <DisplayQuestion question={currentQuestion.question} />
+                            }
 
-            </View>
-            <View>
-                <ShowAnswerBtn showAnswer={showAnswer}/>
-            </View>
+                        </View>
+                        <View>
+                            {
+                                !toDisplayQuestion
+                                    ? <ShowAnswerBtn showAnswer={showAnswer} />
+                                    : <ShowScoreButtons scoreNextQuestion={scoreNextQuestion} />
+                            }
+                        </View>
+                    </View>
+                    : <Finished  
+                    backToDeck={backToDeck}
+                    resetQuiz={resetQuiz} 
+                    correctAnswers={correctAnswers}/>
+            }
         </View>
     );
 };

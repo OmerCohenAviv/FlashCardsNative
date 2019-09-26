@@ -5,6 +5,7 @@ import Constants from 'expo-constants';
 import { getDecks, initDecks } from './AsyncStorage/AsyncStorageHelpers/AsyncStorageHelpers';
 import { mainStackNavigator } from './Navigation/Stack';
 import { createAppContainer } from 'react-navigation';
+import { setLocalNotifications,  } from './AsyncStorage/Notifications/Notifications'
 
 const StatusBarFlashCards = (...props) => {
   return (
@@ -20,7 +21,8 @@ class App extends Component {
   state = {
     initStorage: false
   };
-  componentWillMount() {
+  componentDidMount() {
+    setLocalNotifications();
     const { initStorage } = this.state
     getDecks().then((allDecksFetched) => {
       if (allDecksFetched === null) {

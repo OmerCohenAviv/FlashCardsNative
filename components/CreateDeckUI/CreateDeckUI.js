@@ -22,7 +22,7 @@ const createDeck = (props) => {
                     onPress={submit}
                     disabled={valid}>
                     <Text>
-                        Submit
+                        Create Deck!
                     </Text>
                 </TouchableOpacity>
             </View>
